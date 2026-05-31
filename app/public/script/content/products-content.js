@@ -61,7 +61,7 @@ export function initProductsContent() {
                 .then(res => res.json()).then(data => {
                 if (data.success) {
                     loadCart();
-                    showAlert("Товар добавлен", "success")
+                    showAlert("Добавлено", "success")
                 } else {
                     showAlert(data.error);
                 }
