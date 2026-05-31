@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../../../db/models/Users.php';
 require_once __DIR__ . '/../../../db/models/Orders.php';
 require_once __DIR__ . '/../../../db/models/Carts.php';
-require_once __DIR__ . '/../../services/EmailService.php';
+require_once __DIR__ . '/../../../services/EmailService.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -106,6 +106,7 @@ try {
     ]);
 } catch (Exception $e) {
     http_response_code(500);
+    error_log($e->getMessage());
     echo json_encode([
         'success' => false,
         'error' => "Сервис временно недоступен"
