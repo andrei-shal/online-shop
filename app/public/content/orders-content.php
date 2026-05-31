@@ -23,24 +23,39 @@ if (!isset($_SESSION['user'])) {
             </div>
             <?php
         } else {
+            $statusConfig = [
+                    'CREATED'        => ['text' => 'Создан', 'class' => 'bg-info-subtle text-info border-info-subtle'],
+                    'CONFIRMED' => ['text' => 'В обработке', 'class' => 'bg-warning-subtle text-warning-emphasis border-warning-subtle'],
+                    'COMPLITED'  => ['text' => 'Доставлен', 'class' => 'bg-success-subtle text-success border-success-subtle'],
+                    'CANCELLED'  => ['text' => 'Отменен', 'class' => 'bg-danger-subtle text-danger border-danger-subtle'],
+            ];
+
             ?>
             <div class="d-flex flex-column gap-3">
-                <?php foreach ($userOrders as $order): ?>
+                <?php foreach ($userOrders as $order):
+                    $currentStatus = strtoupper($order['status'] ?? 'CREATED');
+                    $statusInfo = $statusConfig[$currentStatus] ?? ['text' => $currentStatus, 'class' => 'bg-light text-secondary border'];
+                    ?>
                     <div class="card border-0 bg-white p-4 rounded-4 shadow-sm border">
 
-                        <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom pb-3 mb-3 gap-2">
-                            <div>
-                                <h5 class="mb-1 text-dark fw-bold">Заказ #<?= $order['id'] ?></h5>
+                        <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between border-bottom pb-3 mb-3 gap-3">
+                            <div class="min-w-0">
+                                <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+                                    <h5 class="mb-0 text-dark fw-bold">Заказ #<?= $order['id'] ?></h5>
+                                    <span class="badge border rounded-pill px-2.5 py-1 small <?= $statusInfo['class'] ?>">
+                                        <?= htmlspecialchars($statusInfo['text']) ?>
+                                    </span>
+                                </div>
                                 <span class="text-muted small">
                                     От <?= date('d.m.Y в H:i', strtotime($order['created_at'])) ?>
                                 </span>
                             </div>
-                            <div class="text-end">
-                                <span class="fs-4 fw-bold text-primary">
+                            <div class="text-start text-sm-end w-100 w-sm-auto">
+                                <span class="fs-4 fw-bold text-primary d-block d-sm-inline">
                                     <?= number_format($order['total_sum'] / 100, 2, '.', ' ') ?> руб.
                                 </span>
                                 <div class="mt-1">
-                                    <span class="badge bg-light text-secondary border rounded-pill px-3 py-1.5">
+                                    <span class="badge bg-light text-secondary border rounded-pill px-3 py-1.5 d-inline-block text-truncate" style="max-width: 200px;">
                                         <?= htmlspecialchars($order['email']) ?>
                                     </span>
                                 </div>
@@ -49,8 +64,8 @@ if (!isset($_SESSION['user'])) {
 
                         <div class="d-flex flex-column gap-2">
                             <?php foreach ($orders->getOrderItems($order['id']) as $item): ?>
-                                <div class="card border-0 bg-light p-2.5 rounded-3 d-flex flex-row align-items-center justify-content-between gap-3">
-                                    <div class="d-flex align-items-center gap-3 min-w-0">
+                                <div class="card border-0 bg-light p-2.5 rounded-3 d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-2 gap-sm-3">
+                                    <div class="d-flex align-items-center gap-3 min-w-0 w-100">
                                         <div class="rounded-2 bg-white p-1 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 45px; height: 45px;">
                                             <?php if (!empty($item['image_path'])): ?>
                                                 <img src="<?= htmlspecialchars($item['image_path']) ?>" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain;">
@@ -61,11 +76,11 @@ if (!isset($_SESSION['user'])) {
                                                 </svg>
                                             <?php endif; ?>
                                         </div>
-                                        <span class="text-truncate fw-semibold text-dark mb-0" style="font-size: 0.95rem;">
+                                        <span class="text-wrap fw-semibold text-dark mb-0" style="font-size: 0.95rem; word-break: break-word;">
                                             <?= htmlspecialchars($item['title']) ?>
                                         </span>
                                     </div>
-                                    <div class="text-muted text-end flex-shrink-0 ps-2" style="font-size: 0.9rem;">
+                                    <div class="text-muted text-start text-sm-end flex-shrink-0 ps-0 ps-sm-2 mt-1 mt-sm-0 small" style="font-size: 0.9rem; align-self: flex-end;">
                                         <span class="fw-medium text-dark"><?= $item['quantity'] ?> шт.</span>
                                         <span class="mx-1">×</span>
                                         <?= number_format($item['price'] / 100, 2, '.', ' ') ?> руб.
