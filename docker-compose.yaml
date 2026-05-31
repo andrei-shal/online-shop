@@ -62,6 +62,8 @@ services:
     command: volume -mserver="s3master:9333" -port=8080
     volumes:
       - ./s3:/data
+    depends_on:
+      - s3master
     networks:
       - s3-network
 
