@@ -95,7 +95,7 @@ session_start();
                 </div>
             </form>
 
-            <div id="products-content">
+            <div id="products-content" class="pb-5">
                 <?php
                 $_GET['page'] = (int)(isset($_GET['page']) ? $_GET['page'] : 1);
                 $_GET['pageSize'] = 6;
