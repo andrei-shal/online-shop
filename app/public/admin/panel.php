@@ -97,8 +97,8 @@ try {
                             <option value="" <?= $currentStatus === '' ? 'selected' : '' ?>>Все статусы</option>
                             <option value="CREATED" <?= $currentStatus === 'CREATED' ? 'selected' : '' ?>>Создан (Created)</option>
                             <option value="CONFIRMED" <?= $currentStatus === 'CONFIRMED' ? 'selected' : '' ?>>Подтвержден (Confirmed)</option>
-                            <option value="COMPLITED" <?= $currentStatus === 'COMPLETED' ? 'selected' : '' ?>>Выполнен (Completed)</option>
-                            <option value="CANCELED" <?= $currentStatus === 'CANCELED' ? 'selected' : '' ?>>Отменен (Canceled)</option>
+                            <option value="COMPLETED" <?= $currentStatus === 'COMPLETED' ? 'selected' : '' ?>>Выполнен (Completed)</option>
+                            <option value="CANCELLED" <?= $currentStatus === 'CANCELLED' ? 'selected' : '' ?>>Отменен (Canceled)</option>
                         </select>
                     </div>
 

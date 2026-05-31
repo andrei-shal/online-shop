@@ -26,7 +26,7 @@ if (!isset($_SESSION['user'])) {
             $statusConfig = [
                     'CREATED'        => ['text' => 'Создан', 'class' => 'bg-info-subtle text-info border-info-subtle'],
                     'CONFIRMED' => ['text' => 'В обработке', 'class' => 'bg-warning-subtle text-warning-emphasis border-warning-subtle'],
-                    'COMPLITED'  => ['text' => 'Доставлен', 'class' => 'bg-success-subtle text-success border-success-subtle'],
+                    'COMPLETED'  => ['text' => 'Доставлен', 'class' => 'bg-success-subtle text-success border-success-subtle'],
                     'CANCELLED'  => ['text' => 'Отменен', 'class' => 'bg-danger-subtle text-danger border-danger-subtle'],
             ];
 

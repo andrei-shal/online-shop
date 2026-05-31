@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../../../db/models/Users.php';
 require_once __DIR__ . '/../../../db/models/Orders.php';
 require_once __DIR__ . '/../../../db/models/Carts.php';
+require_once __DIR__ . '/../../services/EmailService.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -81,7 +82,23 @@ try {
         exit;
     }
 
-    $orders->sendOrderEmail($order, $email);
+    $order = $orders->getById($order);
+
+    if ($order) {
+        $items = $orders->getOrderItems($order['id']);
+
+        if ($items) {
+            $emailService = EmailService::getInstance();
+
+            $emailService->SendCreateOrderEmail(
+                $order['id'],
+                $email,
+                $items,
+                $order['total_sum'],
+                $order['created_at']
+            );
+        }
+    }
 
     http_response_code(201);
     echo json_encode([

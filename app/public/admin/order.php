@@ -98,7 +98,7 @@ try {
                         <option value="CREATED" <?= $order['status'] === 'CREATED' ? 'selected' : '' ?>>Created</option>
                         <option value="CONFIRMED" <?= $order['status'] === 'CONFIRMED' ? 'selected' : '' ?>>Confirmed</option>
                         <option value="COMPLITED" <?= $order['status'] === 'COMPLETED' ? 'selected' : '' ?>>Completed</option>
-                        <option value="CANCELED" <?= $order['status'] === 'CANCELED' ? 'selected' : '' ?>>Canceled</option>
+                        <option value="CANCELED" <?= $order['status'] === 'CANCELLED' ? 'selected' : '' ?>>Canceled</option>
                     </select>
                 </div>
             </div>
