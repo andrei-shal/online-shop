@@ -55,24 +55,31 @@ export function initProductsContent() {
     container.addEventListener('click', (e) => {
         const cartButton = e.target.closest('.add-to-cart-button');
         if (cartButton) {
+            cartButton.disabled = true;
+
             touchAPI("cart/add", {"product": cartButton.dataset.product, "quantity": 1})
                 .then(res => res.json()).then(data => {
                 if (data.success) {
                     loadCart();
+                    showAlert("Товар добавлен", "success")
                 } else {
                     showAlert(data.error);
                 }
             }).catch(() => {
                 showAlert("Ошибка связи с сервером");
-            });
+            }).finally(() => cartButton.disabled = false);
             return;
         }
 
         const pageButton = e.target.closest('.pagination-button');
         if (pageButton) {
+            pageButton.disabled = true;
+
             const filterForm = document.querySelector('#filter-form');
             const targetPage = pageButton.dataset.page;
             updateProducts(filterForm, targetPage);
+
+            pageButton.disabled = false;
 
             document.getElementById('filter-form')?.scrollIntoView({ behavior: 'smooth' });
             return;
