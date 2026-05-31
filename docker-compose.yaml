@@ -46,19 +46,18 @@ services:
       interval: 3s
       timeout: 2s
     networks:
-      - s3-network
       - db-network
 
   s3master:
     image: chrislusf/seaweedfs
-    container_name: seaweedfs_master
+    container_name: s3master
     command: master
     networks:
       - s3-network
 
   s3volume:
     image: chrislusf/seaweedfs
-    container_name: seaweedfs_volume
+    container_name: s3volume
     command: volume -mserver="s3master:9333" -port=8080
     volumes:
       - ./s3:/data
@@ -69,7 +68,7 @@ services:
 
   s3filer:
     image: chrislusf/seaweedfs
-    container_name: seaweedfs_filer
+    container_name: s3filer
     command: filer -master="s3master:9333"
     depends_on:
       - s3master
