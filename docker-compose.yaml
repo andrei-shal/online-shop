@@ -51,14 +51,14 @@ services:
   s3master:
     image: chrislusf/seaweedfs
     container_name: s3master
-    command: master
+    command: master -ip=0.0.0.0
     networks:
       - s3-network
 
   s3volume:
     image: chrislusf/seaweedfs
     container_name: s3volume
-    command: volume -mserver="s3master:9333" -port=8080
+    command: volume -mserver="s3master:9333" -port=8080 -ip=0.0.0.0
     volumes:
       - ./s3:/data
     depends_on:
@@ -69,7 +69,7 @@ services:
   s3filer:
     image: chrislusf/seaweedfs
     container_name: s3filer
-    command: filer -master="s3master:9333"
+    command: filer -master="s3master:9333" -ip=0.0.0.0
     depends_on:
       - s3master
       - s3volume
