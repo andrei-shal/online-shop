@@ -97,8 +97,8 @@ try {
                     <select class="form-select status-select fw-medium rounded-3" data-order="<?= $order['id'] ?>">
                         <option value="CREATED" <?= $order['status'] === 'CREATED' ? 'selected' : '' ?>>Created</option>
                         <option value="CONFIRMED" <?= $order['status'] === 'CONFIRMED' ? 'selected' : '' ?>>Confirmed</option>
-                        <option value="COMPLITED" <?= $order['status'] === 'COMPLETED' ? 'selected' : '' ?>>Completed</option>
-                        <option value="CANCELED" <?= $order['status'] === 'CANCELLED' ? 'selected' : '' ?>>Canceled</option>
+                        <option value="COMPLETED" <?= $order['status'] === 'COMPLETED' ? 'selected' : '' ?>>Completed</option>
+                        <option value="CANCELLED" <?= $order['status'] === 'CANCELLED' ? 'selected' : '' ?>>Canceled</option>
                     </select>
                 </div>
             </div>
