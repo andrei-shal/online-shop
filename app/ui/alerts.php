@@ -1,0 +1,1 @@
+<div id="alerts" class="position-fixed bottom-0 start-0 p-3" style="z-index: 9999;"></div>

@@ -8,6 +8,8 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 RUN echo 'sendmail_path = "/usr/bin/msmtp -C /etc/msmtprc -t"' > /usr/local/etc/php/conf.d/sendmail.ini
 
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/apache2.conf
 RUN a2enmod rewrite
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh

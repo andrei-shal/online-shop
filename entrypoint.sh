@@ -20,4 +20,6 @@ printf "%s\n" \
 chown www-data:www-data /etc/msmtprc
 chmod 600 /etc/msmtprc
 
+php /var/www/html/init.php
+
 exec "$@"

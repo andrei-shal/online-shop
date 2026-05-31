@@ -1,0 +1,9 @@
+#detail-count::-webkit-outer-spin-button,
+#detail-count::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#detail-count {
+    -moz-appearance: textfield;
+}
